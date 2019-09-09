@@ -5,8 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".user.view.FormActivity"
-android:background="#4A7AEB9A">
+        tools:context=".user.view.FormActivity">
 
     <TextView
             android:text="@string/customer_id"
@@ -109,7 +108,9 @@ android:background="#4A7AEB9A">
             android:id="@+id/button_submit"
             android:text="@string/submit"
             android:layout_width="0dp"
-            android:background=""
+            android:background="#1518B8"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -125,6 +126,9 @@ android:background="#4A7AEB9A">
             android:id="@+id/button_user_list"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:background="#1518B8"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/button_submit"
