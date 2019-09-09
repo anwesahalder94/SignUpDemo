@@ -1,0 +1,22 @@
+<resources>
+
+    <string-array name="CustomerType">
+        <item>Select Customer Type</item>
+        <item>Individual</item>
+        <item>Group</item>
+    </string-array>
+
+    <string name="app_name">FormApplication</string>
+    <string name="customer_name">Customer Name</string>
+    <string name="customer_id">Customer ID:</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone number</string>
+    <string name="submit">Submit</string>
+    <string name="welcome">welcome</string>
+    <string name="type">Type</string>
+    <string name="a">A</string>
+    <string name="user_list">User List</string>
+    <string name="individual">Individual</string>
+    <string name="group">Group</string>
+    <string name="sign_up">SIGN UP</string>
+</resources>
