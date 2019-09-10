@@ -19,18 +19,17 @@ class FormActivity : AppCompatActivity() {
 
     private lateinit var mUserViewModel: UserViewModel
     private lateinit var mUserDetails: UserEntity
-    private var db: UserDatabase? = null
+    private lateinit var mUserDatabase: UserDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_form)
 
-        db = UserDatabase.getInstance(FormApplication.applicationContext())
+        mUserDatabase = UserDatabase.getInstance(FormApplication.applicationContext())!!
         mUserViewModel =
             ViewModelProviders.of(this, UserViewModel.Factory(FormApplication.context)).get(UserViewModel::class.java)
 
         mUserDetails = UserEntity()
-
 
         setCustId()
         setEventListener()
@@ -44,6 +43,7 @@ class FormActivity : AppCompatActivity() {
         mUserViewModel.getUserDetails().observe(this, Observer { userList ->
             if (userList.size == 1) {
                 if (userList[0].cust_name.equals("")) {
+                    text_customer_id.text = "1"
                     button_user_list.visibility = View.GONE
 
                 } else {
@@ -52,8 +52,10 @@ class FormActivity : AppCompatActivity() {
             } else {
                 button_user_list.visibility = View.VISIBLE
             }
-            for (i in 0 until userList.size) {
-                text_customer_id.text = (userList[userList.size - 1].cust_id + 1).toString()
+            if (userList.size > 1) {
+                for (i in 0 until userList.size) {
+                    text_customer_id.text = (userList[userList.size - 1].cust_id + 1).toString()
+                }
             }
         })
     }
@@ -127,7 +129,7 @@ class FormActivity : AppCompatActivity() {
         })
     }
 
-    //making the edit texts blank after uploading data to db
+    //making the edit texts blank after uploading data to mUserDatabase
     private fun clearData() {
         edit_name?.text!!.clear()
         edit_address?.text!!.clear()

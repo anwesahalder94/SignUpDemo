@@ -1,6 +1,5 @@
 package com.example.formapplication.data.repository
 
-import android.database.Cursor
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,30 +9,30 @@ import com.example.formapplication.data.db.entity.UserEntity
 
 class UserLocalRepository {
 
-    private var db: UserDatabase ? = null
+    private var mUserDatabase: UserDatabase ? = null
 
     companion object {
 
-        private var userLocalRepository: UserLocalRepository? = null
+        private var sUserLocalRepository: UserLocalRepository? = null
 
         @Synchronized
         @JvmStatic
         fun getInstance(): UserLocalRepository {
-            if (userLocalRepository == null)
-                userLocalRepository =
+            if (sUserLocalRepository == null)
+                sUserLocalRepository =
                     UserLocalRepository()
-            return userLocalRepository!!
+            return sUserLocalRepository!!
         }
     }
 
     init {
-        db = UserDatabase.getInstance(FormApplication.applicationContext())
+        mUserDatabase = UserDatabase.getInstance(FormApplication.applicationContext())
     }
 
     fun insertUser(insertUser: UserEntity){
         object : AsyncTask<Void, Void, Void>(){
             override fun doInBackground(vararg p0: Void?): Void? {
-                db!!.userDao().insertUser(insertUser)
+                mUserDatabase!!.userDao().insertUser(insertUser)
                 return null
             }
         }.execute()
@@ -43,7 +42,7 @@ class UserLocalRepository {
         var userList = MutableLiveData<List<UserEntity>>()
         object : AsyncTask<Void, Void, List<UserEntity>>(){
             override fun doInBackground(vararg p0: Void?): List<UserEntity> {
-                return db!!.userDao().getAllUserDetails()
+                return mUserDatabase!!.userDao().getAllUserDetails()
             }
             override fun onPostExecute(result: List<UserEntity>?) {
                 return userList.postValue(result)
@@ -55,7 +54,7 @@ class UserLocalRepository {
     fun updateUserDetails(updateUser: UserEntity){
         object : AsyncTask<Void, Void, Void>(){
             override fun doInBackground(vararg p0: Void?): Void? {
-                db!!.userDao().updateUserDetails(updateUser)
+                mUserDatabase!!.userDao().updateUserDetails(updateUser)
                 return null
             }
         }.execute()

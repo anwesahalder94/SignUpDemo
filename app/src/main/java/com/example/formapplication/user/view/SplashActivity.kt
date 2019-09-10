@@ -18,7 +18,7 @@ import com.example.formapplication.user.viewmodel.UserViewModel
  */
 class SplashActivity: AppCompatActivity() {
 
-    private var db: UserDatabase? = null
+    private var mUserDatabase: UserDatabase? = null
     private lateinit var mUserViewModel: UserViewModel
     private lateinit var mUserDetails: UserEntity
 
@@ -32,7 +32,7 @@ class SplashActivity: AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         // creating the database
-        db = UserDatabase.getInstance(applicationContext)
+        mUserDatabase = UserDatabase.getInstance(applicationContext)
 
         mUserViewModel =
             ViewModelProviders.of(this, UserViewModel.Factory(FormApplication.context)).get(UserViewModel::class.java)
